@@ -1,0 +1,20 @@
+#Install mysql server centos6
+yum install mysql-server
+
+#Set root password in mysql 5.1
+mysqladmin -u user -p
+
+
+##To install mysql server 5.6 in centos
+
+1. Download the yum repo rpm package 
+wget http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+
+2. Install the rpm
+rpm -ivh mysql-community-release-el6-5.noarch.rpm
+
+3. Now install the mysql-server using yum
+yum install mysql-server
+
+http://sharadchhetri.com/2013/12/26/install-mysql-server-5-6-in-centos-6-x-and-red-hat-6-x-linux/
+
