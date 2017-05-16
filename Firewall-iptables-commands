@@ -1,0 +1,51 @@
+Flag description : 
+-L : List the iptable rules
+-A : Add to the bottom
+-I : Insert on the top
+-p : Protocol
+-s : Source
+-d : Destination
+-D : Delete
+-j : Jump to the action. (Eg : ACCEPT / REJECT / ETC)
+-n : Show numeric IP
+-F : To flush the iptables
+-P : To change default policy
+
+1. To add rule in the bottom of the input chain of the firewall
+iptables -A INPUT -p tcp -s XXX.XXX.XXX.XXX -j ACCEPT
+
+2. To insert rule on the top of the Output chain
+iptables -I OUTPUT -p tcp -d  XXX.XXX.XXX.XXX -j ACCEPT
+
+3. To delete rule by the rule number in a perticular chain
+iptables -D INPUT 4
+
+4. To check the line numbers of rules in a perticular chain of iptables
+iptables -L INPUT –line-numbers
+
+5. To delete rule by actual rule
+iptables -D INPUT -s 127.0.0.1 -p tcp --dport 111 -j ACCEPT
+
+6. Insert rule on particular number
+iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 4000 -j ACCEPT
+
+7. To change default policy as accept
+iptables -P INPUT ACCEPT  
+
+8. Should be the default policy to accept ESTABLISHED and Related state connection
+Iptables -A INPUT -m tcp -p tcp -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+9. To save and restore iptables
+Debian/Ubuntu: iptables-save > /etc/iptables/rules.v4
+RHEL/CentOS: iptables-save > /etc/sysconfig/iptables
+
+Debian/Ubuntu: iptables-restore < /etc/iptables/rules.v4
+RHEL/CentOS: iptables-restore < /etc/sysconfig/iptables
+
+States description : 
+
+    NEW -- meaning that the packet has started a new connection, or otherwise associated with a connection which has not seen packets in both directions.
+
+    ESTABLISHED -- meaning that the packet is associated with a connection which has seen packets in both directions.
+
+    RELATED -- meaning that the packet is starting a new connection, but is associated with an existing connection, such as an FTP data transfer, or an ICMP error.
