@@ -27,6 +27,18 @@ mysql> flush privileges;
 mysql> quit
 
 
+#### Trouble shoot #################################################
+- In case of broken schema / structure run
+mysql_upgrade -u root -p
+
+- In case of size problem with "ibdata1" file, in /etc/my.conf add the below parameter
+innodb_data_file_path = ibdata1:10M:autoextend
+
+- In case of size problem with innodb log file, there are two solutions to this particular problem:
+    * Restore the my.cnf file to its original state, with an " innodb_log_file_size= " to the actual size of the existing InnoDB log files.
+    * Rename or move both the ./ib_logfile0 and ./ib_logfile1 files, and then start the MySQL server.
+
+- Log and data files are located at /var/lib/mysql (In centOD 6)
 
 #################################################################################
 #### Crack / Reset Mysql root password ##########################################
