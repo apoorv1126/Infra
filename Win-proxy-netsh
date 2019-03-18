@@ -1,0 +1,11 @@
+# Configure the proxy server manually using netsh command : 
+Open an elevated command-line:
+
+a. Go to Start and type cmd.
+
+b. Right-click Command prompt and select Run as administrator.
+
+Enter the following command and press Enter:
+
+- netsh winhttp set proxy <proxy>:<port>
+Eg : 10.10.10.10:8080
